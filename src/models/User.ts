@@ -6,16 +6,19 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('appointments') // determina que a classe abaixo sera passsada para uma tabela
-class Appointment {
+@Entity('users') // determina que a classe abaixo sera passsada para uma tabela
+class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  provider: string;
+  name: string;
 
-  @Column('timestamp with time zone')
-  date: Date;
+  @Column()
+  email: string;
+
+  @Column()
+  password: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -24,4 +27,4 @@ class Appointment {
   updated_at: Date;
 }
 
-export default Appointment;
+export default User;
