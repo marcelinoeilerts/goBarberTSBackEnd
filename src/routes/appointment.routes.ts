@@ -5,6 +5,7 @@ import { parseISO } from 'date-fns';
 // import Appointment from '../models/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import CreateAppointmentService from '../services/CreateAppointmentService';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 /**
  * parseISO -> converte string para date nativo do js Date()
@@ -13,11 +14,15 @@ import CreateAppointmentService from '../services/CreateAppointmentService';
 
 const appointmentsRouter = Router();
 
+appointmentsRouter.use(ensureAuthenticated);
+
 // const appointments: Appointment[] = [];
 
 // Rotas => receber requisicao, chamar outro arquivo e devolver resposta
 
 appointmentsRouter.get('/', async (request, response) => {
+  console.log(request.user);
+
   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
   const appointments = await appointmentsRepository.find();
 
